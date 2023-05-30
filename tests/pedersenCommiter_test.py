@@ -79,9 +79,10 @@ class TestJubjub(unittest.TestCase):
     
     def test_pedersenCommitments(self):
         G = self._point_g()
-        a, b, _ = self._fe_rnd()
+        a, b, c = self._fe_rnd()
         A = G.mult(a)
         B = G.mult(b)
+        C = G.mult(c)
 
         ab = (a.n * b.n) % JUBJUB_E  # 7006652
         AB = G.mult(ab)
@@ -89,6 +90,12 @@ class TestJubjub(unittest.TestCase):
         self.assertEqual(B.mult(a), AB)
         print(A.add(B))
         print(a, b)
+
+        print(A.add(C))
+        print(a, c)
+
+        print(B.add(C))
+        print(b, c)
 
 
 if __name__ == "__main__":
